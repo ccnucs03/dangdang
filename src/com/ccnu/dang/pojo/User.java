@@ -114,6 +114,16 @@ public class User {
 	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", nickname="
+				+ nickname + ", password=" + password + ", userIntegral="
+				+ userIntegral + ", isEmailVerify=" + isEmailVerify
+				+ ", emailVerifyCode=" + emailVerifyCode + ", lastLoginTime="
+				+ lastLoginTime + ", lastLoginIp=" + lastLoginIp
+				+ ", addresses=" + addresses + "]";
+	}
+	
 	
 	
 	

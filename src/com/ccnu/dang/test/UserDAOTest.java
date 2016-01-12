@@ -24,5 +24,5 @@ public class UserDAOTest {
 		userDao.add(user);		
 	}
 	
-
+	
 }

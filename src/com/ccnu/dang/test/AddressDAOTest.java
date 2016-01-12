@@ -1,5 +1,7 @@
 package com.ccnu.dang.test;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.ccnu.dang.dao.AddressDAO;
@@ -24,5 +26,14 @@ public class AddressDAOTest {
 		address.setUser(user);		
 		addressDao.add(address);
 	}
+	
+	@Test
+	public void findByUserId() {
+		List<Address> list = addressDao.findByUserId(1);
+		for(Address a : list) {
+			System.out.println(a.toString());
+		}
+	}
+
 
 }
