@@ -70,5 +70,63 @@ public class AddressDAOImpl implements AddressDAO {
 			return null;
 		}
 	}
+	
+	@Override
+	public boolean update(Address address) {
+		log.debug("updating Address instance");
+		boolean flag = true;
+		System.out.println("before getSession");
+		Session session = HibernateSessionFactory.getSession();
+		System.out.println("after getSession");
+		Transaction  transaction = null;   //声明一个事务对象
+		try {
+			transaction = session.beginTransaction();//开启事务
+			System.out.println("1111111");
+			session.update(address);
+			System.out.println("22222222");
+			transaction.commit();//提交事务			
+			log.debug("update successful");
+		} catch (RuntimeException re) {
+			log.error("update failed", re);
+			re.printStackTrace();
+			transaction.rollback();//事务回滚		
+			flag = false;
+			throw re;			
+		}
+		HibernateSessionFactory.closeSession();//关闭Session对象
+		if(flag)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public boolean delete(Address address) {
+		log.debug("deleting Address instance");
+		boolean flag = true;
+		System.out.println("before getSession");
+		Session session = HibernateSessionFactory.getSession();
+		System.out.println("after getSession");
+		Transaction  transaction = null;   //声明一个事务对象
+		try {
+			transaction = session.beginTransaction();//开启事务
+			System.out.println("1111111");
+			session.delete(address);
+			System.out.println("22222222");
+			transaction.commit();//提交事务			
+			log.debug("delete successful");
+		} catch (RuntimeException re) {
+			log.error("delete failed", re);
+			re.printStackTrace();
+			transaction.rollback();//事务回滚		
+			flag = false;
+			throw re;			
+		}
+		HibernateSessionFactory.closeSession();//关闭Session对象
+		if(flag)
+			return true;
+		else
+			return false;
+	}
 
 }

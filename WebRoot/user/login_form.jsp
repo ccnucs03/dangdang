@@ -1,4 +1,5 @@
 <%@page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -27,12 +28,12 @@
 						<h3>
 							登录当当网
 						</h3>
-
-						<form method="post" action="" id="ctl00">
+						<FONT color="red"><s:actionerror/></FONT>  <!--显示错误信息 -->
+						<form method="post" action="login" id="ctl00">
 							<ul>
 								<li>
 									<span>请输入Email地址：</span>
-									<input type="text" name="name" id="txtUsername" class="textbox" />
+									<input type="text" name="email" id="txtUsername" class="textbox" />
 								</li>
 								<li>
 									<span class="blank">密码：</span>

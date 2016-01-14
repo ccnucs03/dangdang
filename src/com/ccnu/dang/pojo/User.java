@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +42,7 @@ public class User {
 	// 定义该User实体所有关联的Address实体
 	// 指定mappedBy属性表明该User实体不控制关联关系
 	@OneToMany(targetEntity=Address.class 
-			, mappedBy="user")
+			, mappedBy="user", fetch = FetchType.EAGER)
 	private Set<Address> addresses = new HashSet<>();
 	
 	

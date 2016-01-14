@@ -1,4 +1,6 @@
 <%@page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -82,7 +84,7 @@
 						<td valign="top" class="w1">
 							验证码：
 						</td>
-						<td>
+					<!-- 	<td>
 							<img class="yzm_img" id='imgVcode' src="#" />
 							<input name="number" type="text" id="txtVerifyCode"
 								class="yzm_input"/>
@@ -94,7 +96,14 @@
 									<a href="#" >看不清楚？换个图片</a>
 								</p>
 							</div>
-						</td>
+						</td> -->
+						
+						<td>
+						 <img alt="验证码" src="checkcode.action" id="d_img" />
+	                     <input name="codeInput"  /> <FONT color="red"><s:actionerror/></FONT>  <!--显示错误信息 -->
+	                    <a href="javascript:;" id="img_code" 
+							onclick="document.getElementById('d_img').src='checkcode.action?random=' + Math.random() ">看不清楚，换一张</a>
+						 </td>
 					</tr>
 				</table>
 

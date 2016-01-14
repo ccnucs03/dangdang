@@ -53,7 +53,7 @@ private static final Log log = LogFactory.getLog(UserDAOImpl.class);
 			Transaction  transaction = null;   //声明一个事务对象
 			transaction = session.beginTransaction();
 			//System.out.println("1111111");
-			Query query = session.createQuery("from User as user where user.userId=?");
+			Query query = session.createQuery("from User as user where user.userId=?");   //HQL
 			query.setInteger(0, userId);
 			//System.out.println("2222221");			
 			list = query.list();					//查询结果保存到list中
@@ -100,9 +100,9 @@ private static final Log log = LogFactory.getLog(UserDAOImpl.class);
 	}
 	
 	@Override
-	public boolean allowLogin(String nickname, String password) {
-		User user = this.findByName(nickname);
-		if(user == null) {		//判断是否存在该name的用户
+	public boolean allowLogin(String email, String password) {
+		User user = this.findByEmail(email);
+		if(user == null) {		//判断是否存在该Email的用户
 			return false;
 		}else {
 			if(password.equals(user.getPassword())) {	//判断密码是否相同
@@ -137,5 +137,34 @@ private static final Log log = LogFactory.getLog(UserDAOImpl.class);
 		}else{
 			return null;
 		}
+	}
+	
+	@Override
+	public boolean update(User user) {
+		log.debug("updating User instance");
+		boolean flag = true;
+		System.out.println("before getSession");
+		Session session = HibernateSessionFactory.getSession();
+		System.out.println("after getSession");
+		Transaction  transaction = null;   //声明一个事务对象
+		try {
+			transaction = session.beginTransaction();//开启事务
+			System.out.println("1111111");
+			session.update(user);
+			System.out.println("22222222");
+			transaction.commit();//提交事务			
+			log.debug("update successful");
+		} catch (RuntimeException re) {
+			log.error("update failed", re);
+			re.printStackTrace();
+			transaction.rollback();//事务回滚		
+			flag = false;
+			throw re;			
+		}
+		HibernateSessionFactory.closeSession();//关闭Session对象
+		if(flag)
+			return true;
+		else
+			return false;
 	}
 }
